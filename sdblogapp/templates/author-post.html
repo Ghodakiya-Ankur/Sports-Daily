@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <style>
+        .author-post {
+            color: white;
+            background-color: #222;
+        }
+
+        /* Set font color for dropdown options */
+        select option {
+            color: black; /* Adjust this color to ensure visibility */
+        }
+    </style>
+</head>
+<body>
+    Hello this is author listpost
+    <br>
+    {{ user.id }}
+
+
+    --------------------
+
+
+
+
+-------------
+
+<form method="get">
+    <select name="author" onchange="this.form.submit()">
+        <option value="">Select Author</option>
+        {% for author in authors %}
+            <option value="{{ author.id }}">{{ author.username }}</option>
+        {% endfor %}
+    </select>
+    <button type="submit" name="btn-all">Show All</button>
+</form>
+
+{% if userpost %}
+    <ul>
+        {% for post in userpost %}
+            <li>    
+                <a href="{% url 'detail-article' cat=post.category.slug slug=post.slug %}">{{ post.title|slice:"0:60" }}...</a>
+            </li>
+        {% endfor %}
+    </ul>
+{% else %}
+    <p>No posts found for the selected author.</p>
+{% endif %}
+
+
+
+
+</body>
+</html>

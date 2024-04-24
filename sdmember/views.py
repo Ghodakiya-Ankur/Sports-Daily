@@ -76,46 +76,12 @@ class UserRegisterView(SuccessMessageMixin, CreateView):
         expired_otps = OTP.objects.filter(expiry_time__lt=timezone.now())
         expired_otps.delete()
         return context
-    # def send_otp_sms(phone_number, otp):
-#     account_sid = "AC9213a47561dd259923b4e87795145fc7"
-#     auth_token = "a279acde1e910e6ec321546e04f25f08"
-#     verify_sid = "VAf2cae864ae61adbbd7404a6eb11519fb"
     
-#     client = Client(account_sid, auth_token)
-
-#     verification = client.verify.v2.services(verify_sid) \
-#       .verifications \
-#       .create(to=phone_number, channel="sms", code=otp)
-#     print(verification.status)
-# ------------------------------------------------------
-
-#this is final otp system code 
-# def send_otp_sms(phone_number, otp):
-#     # Twilio account credentials
-#     account_sid = "AC9213a47561dd259923b4e87795145fc7"
-#     auth_token = "a279acde1e910e6ec321546e04f25f08"
-#     twilio_phone_number = "+12108710951"
-
-#     # Initialize Twilio client
-#     client = Client(account_sid, auth_token)
-
-#     try:
-#         # Sending SMS with OTP
-#         message = client.messages.create(
-#             body=f"Your OTP is: {otp}",
-#             from_=twilio_phone_number,
-#             to=phone_number
-#         )
-#         print(f"SMS sent successfully to {phone_number}. SID: {message.sid}")
-#         return True  # Return True indicating successful SMS delivery
-#     except Exception as e:
-#         print(f"Error occurred while sending SMS: {e}")
-#         return False  # Return False indicating failure to send SMS
 def send_otp_sms(phone_number, otp):
     # Twilio account credentials
-    account_sid = "AC9213a47561dd259923b4e87795145fc7"
-    auth_token = "a279acde1e910e6ec321546e04f25f08"
-    twilio_phone_number = "+12108710951"
+    account_sid = "twilio sid"
+    auth_token = "token"
+    twilio_phone_number = "twilio number"
 
     # Initialize Twilio client
     client = Client(account_sid, auth_token)
@@ -135,23 +101,6 @@ def send_otp_sms(phone_number, otp):
     except Exception as e:
         print(f"Error occurred while sending SMS: {e}")
         return False  # Return False indicating failure to send SMS"
-#----------------------------------------------------------------------
-# def send_otp_sms(phone_number, otp):
-#     # Twilio account credentials
-#     account_sid = "AC9213a47561dd259923b4e87795145fc7"
-#     auth_token = "a279acde1e910e6ec321546e04f25f08"
-#     verify_sid = "VAf2cae864ae61adbbd7404a6eb11519fb"
-    
-#     client = Client(account_sid, auth_token)
-
-#     # Sending SMS with OTP
-#     try:
-#         verification = client.verify.v2.services(verify_sid) \
-#             .verifications \
-#             .create(to=phone_number, channel="sms", code=otp)
-#         print(verification.status)  # Print Twilio verification status for debugging
-#     except Exception as e:
-#         print(f"Error occurred while sending SMS: {e}")  # Print error message if SMS sending fails
 
 def verify_otp(request):
     if request.method == 'POST':
@@ -385,50 +334,7 @@ from django.views.decorators.csrf import csrf_exempt
 #         expired_otps.delete()
 #         return context
 
-# def send_otp_sms(phone_number, otp):
-#     account_sid = "AC9213a47561dd259923b4e87795145fc7"
-#     auth_token = "a279acde1e910e6ec321546e04f25f08"
-#     verify_sid = "VAf2cae864ae61adbbd7404a6eb11519fb"
-    
-#     client = Client(account_sid, auth_token)
 
-#     verification = client.verify.v2.services(verify_sid) \
-#         .verifications \
-#         .create(to=phone_number, channel="sms", code=otp)
-    
-#     print(verification.status)
-# #------------------------------------------------------
-#send sms
-
-# def send_otp_sms(phone_number, otp):
-#     account_sid = "AC9213a47561dd259923b4e87795145fc7"
-#     auth_token = "a279acde1e910e6ec321546e04f25f08"
-#     verify_sid = "VAf2cae864ae61adbbd7404a6eb11519fb"
-    
-#     client = Client(account_sid, auth_token)
-
-#     verification = client.verify.v2.services(verify_sid) \
-#       .verifications \
-#       .create(to=phone_number, channel="sms", code=otp)
-#     print(verification.status)
-    
-# def verify_otp_sms(phone_number, entered_otp):
-#     account_sid = "ACa976f99952fbbb1edb4fbac7488c25b8"
-#     auth_token = "08a880cdfcc2deaca1c2fc927b2a7c9b"
-#     verify_sid = "VA271c6a27f997618790efa8b7a5082852"
-
-#     client = Client(account_sid, auth_token)
-
-#     try:
-#         verification_check = client.verify.v2.services(verify_sid) \
-#             .verification_checks \
-#             .create(to=phone_number, code=entered_otp)
-#         return verification_check.status
-#     except Exception as e:
-#         # Handle any exceptions that may occur during the verification check
-#         print(f"Error during OTP verification: {e}")
-#         return None
-    
 
 
 
@@ -535,39 +441,6 @@ def logout_view(request):
     # Redirect to a success page or any other page after logout
     return redirect('landingpage/')
 
-#-----------------------------------------
-
-# Download the helper library from https://www.twilio.com/docs/python/install
-# import os
-# from twilio.rest import Client
-
-# # Set environment variables for your credentials
-# # Read more at http://twil.io/secure
-# account_sid = "AC9213a47561dd259923b4e87795145fc7"
-# auth_token = "a279acde1e910e6ec321546e04f25f08"
-# verify_sid = "VAf2cae864ae61adbbd7404a6eb11519fb"
-# verified_number = "+1 2108710951"
-
-# client = Client(account_sid, auth_token)
-
-# verification = client.verify.v2.services(verify_sid) \
-#   .verifications \
-#   .create(to=verified_number, channel="sms")
-# print(verification.status)
-
-# otp_code = input("Please enter the OTP:")
-
-# verification_check = client.verify.v2.services(verify_sid) \
-#   .verification_checks \
-#   .create(to=verified_number, code=otp_code)
-# print(verification_check.status)
-    
-    
-
-
-
-
-#-----------------------------------------------
 
 class CustomPasswordResetView(PasswordResetView):
     template_name = 'registration/reset_form.html'
